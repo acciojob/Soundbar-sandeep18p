@@ -1,16 +1,67 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soundboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #buttons {
+      margin-top: 20px;
+    }
+    .btn {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .stop {
+      background-color: #ff6347; /* tomato */
+      color: white;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1>Soundboard</h1>
+  <div id="buttons">
+    <button id="applause" class="btn applause">Applause</button>
+    <button id="boo" class="btn boo">Boo</button>
+    <button id="gasp" class="btn gasp">Gasp</button>
+    <button id="tada" class="btn tada">Tada</button>
+    <button id="victory" class="btn victory">Victory</button>
+    <button id="srong" class="btn srong">Srong</button>
+    <button id="stop" class="btn stop">Stop</button>
+  </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const buttons = document.querySelectorAll('.btn');
+      const stopButton = document.querySelector('.stop');
+      
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          const soundName = button.id;
+          if (soundName === 'stop') {
+            stopSounds();
+          } else {
+            playSound(soundName);
+          }
+        });
+      });
+
+      function playSound(soundName) {
+        const audio = new Audio(`sounds/${soundName}.mp3`);
+        audio.play();
+      }
+
+      function stopSounds() {
+        const audios = document.querySelectorAll('audio');
+        audios.forEach(audio => audio.pause());
+      }
+    });
+  </script>
 </body>
-
 </html>
