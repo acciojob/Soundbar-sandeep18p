@@ -37,31 +37,31 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const buttons = document.querySelectorAll('.btn');
-      const stopButton = document.querySelector('.stop');
-      
-      buttons.forEach(button => {
-        button.addEventListener('click', () => {
-          const soundName = button.id;
-          if (soundName === 'stop') {
-            stopSounds();
-          } else {
-            playSound(soundName);
-          }
-        });
+     const buttons = document.querySelectorAll('.btn');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const soundName = button.id;
+        if (soundName !== 'stop') {
+          expectPlayingAudio(soundName);
+        } else {
+          stopAllSounds();
+        }
       });
-
-      function playSound(soundName) {
-        const audio = new Audio(`sounds/${soundName}.mp3`);
-        audio.play();
-      }
-
-      function stopSounds() {
-        const audios = document.querySelectorAll('audio');
-        audios.forEach(audio => audio.pause());
-      }
     });
+
+    function expectPlayingAudio(soundName) {
+      const audio = new Audio(`sounds/${soundName}.mp3`);
+      audio.play();
+    }
+
+    function stopAllSounds() {
+      const sounds = document.querySelectorAll('audio');
+      sounds.forEach(sound => {
+        sound.pause();
+        sound.currentTime = 0;
+      });
+    }
   </script>
 </body>
 </html>
