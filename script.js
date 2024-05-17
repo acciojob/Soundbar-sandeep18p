@@ -1,25 +1,16 @@
- document.addEventListener("DOMContentLoaded", function() {
-      const buttons = document.querySelectorAll('.btn');
-      const stopButton = document.querySelector('.stop');
+//your JS code here. If required.
+function playSound(soundName) {
+    var audio = document.createElement('audio');
+    audio.src = 'sounds/' + soundName + '.mp3';
+    audio.play();
+    document.body.appendChild(audio);
+}
 
-      buttons.forEach(button => {
-        button.addEventListener('click', () => {
-          const soundName = button.id;
-          if (soundName === 'stop') {
-            stopSounds();
-          } else {
-            playSound(soundName);
-          }
-        });
-      });
-
-      function playSound(soundName) {
-        const audio = new Audio(`sounds/${soundName}.mp3`);
-        audio.play();
-      }
-
-      function stopSounds() {
-        const audios = document.querySelectorAll('audio');
-        audios.forEach(audio => audio.pause());
-      }
-    });
+function stopAllSounds() {
+    var sounds = document.getElementsByTagName('audio');
+    for (var i = 0; i < sounds.length; i++) {
+        sounds[i].pause();
+        sounds[i].currentTime = 0;
+        document.body.removeChild(sounds[i]); // Remove audio elements from DOM
+    }
+}

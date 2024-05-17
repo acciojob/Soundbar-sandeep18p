@@ -1,67 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Soundboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    #buttons {
-      margin-top: 20px;
-    }
-    .btn {
-      margin: 5px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .stop {
-      background-color: #ff6347; /* tomato */
-      color: white;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Board</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Soundboard</h1>
-  <div id="buttons">
-    <button id="applause" class="btn applause">Applause</button>
-    <button id="boo" class="btn boo">Boo</button>
-    <button id="gasp" class="btn gasp">Gasp</button>
-    <button id="tada" class="btn tada">Tada</button>
-    <button id="victory" class="btn victory">Victory</button>
-    <button id="srong" class="btn srong">Srong</button>
-    <button id="stop" class="btn stop">Stop</button>
-  </div>
-
-  <script>
-     const buttons = document.querySelectorAll('.btn');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const soundName = button.id;
-        if (soundName !== 'stop') {
-          expectPlayingAudio(soundName);
-        } else {
-          stopAllSounds();
-        }
-      });
-    });
-
-    function expectPlayingAudio(soundName) {
-      const audio = new Audio(`sounds/${soundName}.mp3`);
-      audio.play();
-    }
-
-    function stopAllSounds() {
-      const sounds = document.querySelectorAll('audio');
-      sounds.forEach(sound => {
-        sound.pause();
-        sound.currentTime = 0;
-      });
-    }
-  </script>
+    <div id="buttons">
+        <button class="btn" onclick="playSound('applause')">Applause</button>
+        <button class="btn" onclick="playSound('boo')">Boo</button>
+        <button class="btn" onclick="playSound('gasp')">Gasp</button>
+        <button class="btn" onclick="playSound('tada')">Tada</button>
+        <button class="btn" onclick="playSound('victory')">Victory</button>
+        <button class="btn" onclick="playSound('wrong')">Wrong</button>
+        <button class="btn stop" onclick="stopAllSounds()">Stop</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
